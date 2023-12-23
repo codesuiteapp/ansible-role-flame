@@ -1,0 +1,28 @@
+---
+image_registry_server: "docker.io"
+flame_image: "pawelmalak/flame"
+flame_ver: "latest"
+container_name: flame
+flame_port: 8642
+flame_password: asdfg1
+
+docker_compose_bin: "docker-compose"
+use_dkr_net: false
+use_traefik: false
+use_traefik_tls: false
+dkr_network: devops_net
+use_extra_hosts: false
+add_etc_host: "10.11.22.10   devops.com"
+
+app_home_dir: /app
+app_data_dir: /data
+app_logs_dir: /log
+
+flame_home: "{{ app_home_dir }}/flame-docker"
+flame_data: "{{ app_data_dir }}/flame"
+flame_logs: "{{ app_logs_dir }}/flame"
+
+create_user: false
+adm_user: "appadm"
+adm_group: "appadm"
+adm_uid: "1000"
