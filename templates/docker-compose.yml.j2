@@ -7,6 +7,15 @@ services:
     environment:
       - "TZ=Asia/Seoul"
       - "PASSWORD={{ flame_password }}"
+{% if use_traefik %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flame.entrypoints=web,websecure"
+      - "traefik.http.routers.flame.rule=Host(`${trf_domain}`)"
+    {% if use_traefik_tls %}
+      - "traefik.http.routers.flame.tls=true"
+    {% endif %}
+{% endif %}
     ports:
       - {{ flame_port }}:5005
     volumes:
