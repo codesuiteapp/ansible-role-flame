@@ -12,9 +12,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.flame.entrypoints=web,websecure"
       - "traefik.http.routers.flame.rule=Host(`${trf_domain}`)"
-    {% if use_traefik_tls %}
+{% endif %}
+{% if use_traefik and use_traefik_tls %}
       - "traefik.http.routers.flame.tls=true"
-    {% endif %}
 {% endif %}
     ports:
       - {{ flame_port }}:5005
