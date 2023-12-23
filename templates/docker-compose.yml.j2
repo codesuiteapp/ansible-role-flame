@@ -8,7 +8,15 @@ services:
       - "TZ=Asia/Seoul"
       - "PASSWORD={{ flame_password }}"
     ports:
-      - 5005:5005
+      - {{ flame_port }}:5005
     volumes:
       - {{ flame_data }}:/app/data
     restart: unless-stopped
+{% if use_dkr_net %}
+    networks:
+      - {{ dkr_network }}
+
+networks:
+  {{ dkr_network }}:
+    external: true
+{% endif %}

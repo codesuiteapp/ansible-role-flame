@@ -3,7 +3,7 @@ image_registry_server: "docker.io"
 flame_image: "pawelmalak/flame"
 flame_ver: "latest"
 container_name: flame
-flame_port: 8642
+flame_port: 5005
 flame_password: asdfg1
 
 docker_compose_bin: "docker-compose"
