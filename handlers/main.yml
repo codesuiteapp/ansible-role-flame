@@ -1,15 +1,24 @@
+---
 - name: Start flame
   ansible.builtin.command: "{{ docker_compose_bin }} up --detach"
   args:
     chdir: "{{ flame_home }}"
-  register: result
-  changed_when: result.changed
+  register: start_result
+  changed_when: start_result.rc == 0
+
+- name: Stop flame
+  ansible.builtin.command: "{{ docker_compose_bin }} down"
+  args:
+    chdir: "{{ loki_home }}"
+  register: stop_result
+  changed_when: stop_result.rc == 0
 
 - name: Restart flame
-  ansible.builtin.shell:
-    "{{ docker_compose_bin }} down; {{ docker_compose_bin }} up --detach"
+  ansible.builtin.shell: |
+    {{ docker_compose_bin }} down
+    {{ docker_compose_bin }} up --detach
   args:
     chdir: "{{ flame_home }}"
-  register: result
-  changed_when: result.changed
+  register: restart_result
+  changed_when: restart_result.rc == 0
   ignore_errors: true
